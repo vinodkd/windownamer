@@ -11,6 +11,6 @@
 
   <menupopup id="menu_ToolsPopup">
     <menuitem id="menu_windownamer" label="&windownamer.label;"
-              oncommand="windownamer.onMenuItemCommand(event);"/>
+              oncommand="WindowNamer.Overlay.onMenuItemCommand(event);"/>
   </menupopup>
 </overlay>
