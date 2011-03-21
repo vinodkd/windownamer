@@ -1,29 +1,36 @@
-var windownamer = {
-  onLoad: function() {
-    // initialization code
-    this.initialized = true;
-    this.strings = document.getElementById("windownamer-strings");
-  },
-
-  onMenuItemCommand: function(e) {
-    window.openDialog('chrome://windownamer/content/windownamer-dialog.xul','','chrome,centerscreen,modal');
-  },
-
-  onToolbarButtonCommand: function(e) {
-    // just reuse the function above.  you can change this, obviously!
-    windownamer.onMenuItemCommand(e);
-  },
+var WindowNamer = {
+  Overlay : {
+    onLoad: function() {
+      // initialization code
+      this.initialized = true;
+      this.strings = document.getElementById("windownamer-strings");
+      this.setupHandlersForEvents();
+    },
+    
+    onMenuItemCommand: function(e) {
+      window.openDialog('chrome://WindowNamer/content/dialog.xul','','chrome,centerscreen,modal');
+    },
+    
+    onToolbarButtonCommand: function(e) {
+      // just reuse the function above.  you can change this, obviously!
+      WindowNamer.onMenuItemCommand(e);
+    },
+    
     setupHandlersForEvents : function(){
-      window.addEventListener("load",function(windowEvt){
-      // handle (re)loads of the tab
-      alert("winEvt:"+windowEvt.target);
-        gBrowser.addEventListener("load",function(tabEvt){
-          alert("tabevt" +tabEvt.target);
-        },true);
-        gBrowser.tabContainer.addEventListener("TabOpen",function(evt){alert("newtab"+evt.target)},true);
-      },false);;
+      var gb = gBrowser;
+      handler1 = function(tabEvt){
+          if(tabEvt.eventPhase==1 && tabEvt.originalTarget.documentURI != "about:blank" && tabEvt.originalTarget.documentURI == gb.currentURI.spec){
+            // alert("pageshow1: tgt" +tabEvt.originalTarget.nodeName+", ctgt" +tabEvt.currentTarget.nodeName+" uri:" +(tabEvt.originalTarget.documentURI)+" gb:" +(gb.currentURI.spec)+", phase:"+tabEvt.eventPhase);
+            alert(tabEvt.target.title+","+gb.selectedBrowser.contentTitle);
+            // check if the window is already in the list of named windows
+            // if so, replace the name
+            // else do nothing
+          }
+      }
+      document.addEventListener("load",handler1,true);
     }
+  }
 };
 
-window.addEventListener("load", function () { windownamer.onLoad(); }, false);
-windownamer.setupHandlersForEvents();
+window.addEventListener("load", function () { WindowNamer.Overlay.onLoad(); }, false);
+// WindowNamer.setupHandlersForEvents();
