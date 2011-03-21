@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/"?>
+<?xml-stylesheet href="chrome://windownamer/skin/windownamer.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://windownamer/locale/windownamer-dialog.dtd">
+<dialog id="nameEntryDialog" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    title="&windownamerDialog.Title;"
+    buttons="accept,cancel"
+    onload="WindowNamer.init();"
+    ondialogaccept="return WindowNamer.nameWindow()">
+
+  <script type="application/javascript" src="chrome://windownamer/content/windownamer.js"/>
+
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="windownamerdialog-strings" src="chrome://windownamer/locale/windownamer-dialog.properties"/>
+  </stringbundleset>
+
+  <vbox align="left">
+    <hbox align="left">
+      <label value="&windownamerDialog.Msg;" />
+      <textbox id="winName" />
+    </hbox>
+    <hbox align="left">
+      <label id="status" value=""/>
+    </hbox>
+  </vbox>
+</dialog>

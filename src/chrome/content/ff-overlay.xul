@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://windownamer/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://windownamer/locale/overlay.dtd">
+<overlay id="windownamer-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="overlay.js"/>
+  <script src="ff-overlay.js"/>
+
+<stringbundleset id="stringbundleset">
+    <stringbundle id="windownamer-strings" src="chrome://windownamer/locale/overlay.properties"/>
+  </stringbundleset>
+
+  <menupopup id="menu_ToolsPopup">
+    <menuitem id="menu_windownamer" label="&windownamer.label;"
+              oncommand="windownamer.onMenuItemCommand(event);"/>
+  </menupopup>
+</overlay>

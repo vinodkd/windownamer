@@ -1,0 +1,8 @@
+<!ENTITY windownamer.label "Name this window">
+<!ENTITY windownamerContext.label "Your Menuitem">
+<!ENTITY windownamerContext.accesskey "Y">
+<!ENTITY windownamerToolbarButton.label "Your Toolbar Button">
+<!ENTITY windownamerToolbarButton.tooltip "This is your toolbar button!">
+<!ENTITY windownamerSidebar.label "Your Sidebar">
+<!ENTITY windownamerToolbar.name  "example">
+<!ENTITY windownamerToolbar.label "This is an example toolbar. You can hide it under View &gt; toolbars &gt; &windownamerToolbar.name;">

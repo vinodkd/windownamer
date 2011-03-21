@@ -1,0 +1,6 @@
+content   windownamer                 chrome/content/
+skin      windownamer   classic/1.0   chrome/skin/
+locale    windownamer   en-US         chrome/locale/en-US/
+
+
+overlay   chrome://browser/content/browser.xul   chrome://windownamer/content/ff-overlay.xul
