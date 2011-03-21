@@ -1,8 +1,8 @@
-var WindowNamer = function(){
+WindowNamer.Dialog = function(){
   var storedWindowNames;  // a map of window ids to names
   var windowIds;          // a map of window refs to ids
   var currentWindow;      // map holding the id and ref of the current window
-  var WNSTORAGEKEY = "WindowNamer.storedWindowNames";
+  var WNSTORAGEKEY = "WindowNamer.Dialog.storedWindowNames";
   var NAMESEP = " - ";
   var strings;
   var status;
@@ -12,11 +12,11 @@ var WindowNamer = function(){
       strings = document.getElementById("windownamerdialog-strings");
       status = document.getElementById("status");
 
-      storedWindowNames = WindowNamer.load();
-      windowIds = WindowNamer.getWindowIds();
+      storedWindowNames = WindowNamer.Dialog.load();
+      windowIds = WindowNamer.Dialog.getWindowIds();
 
       var textbox = document.getElementById("winName");
-      var wName = WindowNamer.getWindowName();
+      var wName = WindowNamer.Dialog.getWindowName();
       if(wName){
         textbox.value = wName;
         currentWindow.name = wName;
@@ -45,7 +45,7 @@ var WindowNamer = function(){
       var i=0;
       while(windowList.hasMoreElements()){
         var win           = windowList.getNext();
-        var windowID      = WindowNamer.getWindowId(win,i);
+        var windowID      = WindowNamer.Dialog.getWindowId(win,i);
         var thisIsCurrent = false;  //not sure if i'll need it.
     
         if(currentWin == win){
@@ -72,8 +72,8 @@ var WindowNamer = function(){
     nameWindow : function(){
       var textbox = document.getElementById("winName");
       var windowName = textbox.value;
-      if(!WindowNamer.isValidName(windowName)){
-        WindowNamer.updateStatus("Invalid name - only letters and digits allowed. Please try again");
+      if(!WindowNamer.Dialog.isValidName(windowName)){
+        WindowNamer.Dialog.updateStatus("Invalid name - only letters and digits allowed. Please try again");
         textbox.select();
         return false;
       }
@@ -81,10 +81,10 @@ var WindowNamer = function(){
       if(currentWindow.name){ // this window already has a name, so it has to be replaced.
         replace = true;
       }
-      WindowNamer.nameAllTabs(windowName,replace);
-      //WindowNamer.setupHandlersForEvents(windowName);
-      if(!WindowNamer.store(windowName)){
-        WindowNamer.updateStatus("Could not store the name. You might have to set it again for tabs created in future");
+      WindowNamer.Dialog.nameAllTabs(windowName,replace);
+      //WindowNamer.Dialog.setupHandlersForEvents(windowName);
+      if(!WindowNamer.Dialog.store(windowName)){
+        WindowNamer.Dialog.updateStatus("Could not store the name. You might have to set it again for tabs created in future");
         return false;
       }
       return true;
@@ -138,18 +138,7 @@ var WindowNamer = function(){
     updateStatus : function(msg){
       status.value = msg;
     },
-
-    ReloadHandler : function(){
-        alert("evt");
-    },
-  
-    NewTabHandler : function(){
-      function handleEvent(evt){
-        alert("new tab" + evt);
-      }
-    }
   }
-
 }();
 /*
 util functions from early trial runs of working with xul.

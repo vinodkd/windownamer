@@ -1,17 +1,18 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/"?>
-<?xml-stylesheet href="chrome://windownamer/skin/windownamer.css" type="text/css"?>
-<!DOCTYPE dialog SYSTEM "chrome://windownamer/locale/windownamer-dialog.dtd">
+<?xml-stylesheet href="chrome://windownamer/skin/dialog.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://windownamer/locale/dialog.dtd">
 <dialog id="nameEntryDialog" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     title="&windownamerDialog.Title;"
     buttons="accept,cancel"
-    onload="WindowNamer.init();"
-    ondialogaccept="return WindowNamer.nameWindow()">
+    onload="WindowNamer.Dialog.init();"
+    ondialogaccept="return WindowNamer.Dialog.nameWindow()">
 
-  <script type="application/javascript" src="chrome://windownamer/content/windownamer.js"/>
+  <script type="application/javascript" src="chrome://windownamer/content/overlay.js"/>
+  <script type="application/javascript" src="chrome://windownamer/content/dialog.js"/>
 
   <stringbundleset id="stringbundleset">
-    <stringbundle id="windownamerdialog-strings" src="chrome://windownamer/locale/windownamer-dialog.properties"/>
+    <stringbundle id="windownamerdialog-strings" src="chrome://windownamer/locale/dialog.properties"/>
   </stringbundleset>
 
   <vbox align="left">
