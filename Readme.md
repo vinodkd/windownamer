@@ -21,12 +21,13 @@ Now, there are other solutions available - especially on firefox. Firefox has ha
 How to Use
 ==========
 The general steps in using the plugin are:
-* Download and install the plugin
-* Activate the plugin.
-  * Chrome: Select the plugin's icon
-  * FF: Tools -> WindowNamer
-* Enter a name for the current window in the popup that shows up
-* All tabs in the curent window should now have the chosen name
+
+  * Download and install the plugin
+  * Activate the plugin.
+    * Chrome: Select the plugin's icon
+    * FF: Tools -> WindowNamer
+  * Enter a name for the current window in the popup that shows up
+  * All tabs in the curent window should now have the chosen name
 
 
 Implementation
