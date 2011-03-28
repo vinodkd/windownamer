@@ -2,6 +2,7 @@
 <?xml-stylesheet href="chrome://windownamer/skin/overlay.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://windownamer/locale/overlay.dtd">
 <overlay id="windownamer-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="windownamer.js"/>
   <script src="overlay.js"/>
   <script src="ff-overlay.js"/>
 

@@ -13,12 +13,13 @@ var WindowNamer = {
     
     onToolbarButtonCommand: function(e) {
       // just reuse the function above.  you can change this, obviously!
-      WindowNamer.onMenuItemCommand(e);
+      this.onMenuItemCommand(e);
     },
     
     setupHandlersForEvents : function(){
       var gb = gBrowser;
       handler1 = function(tabEvt){
+        // this check expression took HOURS of work to come up with. Exasperating to say the least.
           if(tabEvt.eventPhase==1 && tabEvt.originalTarget.documentURI != "about:blank" && tabEvt.originalTarget.documentURI == gb.currentURI.spec){
             // alert("pageshow1: tgt" +tabEvt.originalTarget.nodeName+", ctgt" +tabEvt.currentTarget.nodeName+" uri:" +(tabEvt.originalTarget.documentURI)+" gb:" +(gb.currentURI.spec)+", phase:"+tabEvt.eventPhase);
             alert(tabEvt.target.title+","+gb.selectedBrowser.contentTitle);
