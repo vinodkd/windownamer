@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <script type="text/javascript" charset="utf-8">
+      windownames = {};
+
+      function onload(){
+        chrome.windows.getAll({}, function(windows){
+          for(var w in windows){
+            console.log(windows[w].id);
+            windownames[windows[w].id] = "";
+          }
+        });
+      }
+
+      function getNameforWindow(callback){
+        chrome.windows.getCurrent(function(win){
+            return callback(windownames[win.id] || "");
+        });
+      }
+
+      function addNameForWindow(wid,wname){
+        console.log("bg:"+ wid +", "+wname);
+        windownames[wid] = wname;
+        chrome.tabs.getAllInWindow(wid,function(tabs){
+          console.log(tabs.length);
+          for(t in tabs){
+            var tid=tabs[t].id;
+            var title = tabs[t].title;
+            console.log("called:tid:"+tid+",title:"+title);
+/*
+            chrome.tabs.sendRequest(tid,{"wname":wname},function(resp){
+              console.log("called:tid:"+tid+",title:"+tabs[t].title);
+            });
+*/
+            try{
+              chrome.tabs.executeScript(tid,{code: "document.title = '" + wname +" - ' + document.title"});
+              //chrome.tabs.executeScript(tid,{code: "document.title += '" + wname +"'"});  
+            }
+            catch(ex){
+              console.log("windownamer failed to name this tab. reason: "+ ex);
+            }
+          }
+        });
+      }
+
+    chrome.extension.onRequest.addListener(function(request,sender,callback){ 
+      getNameforWindow(function(wname){
+        callback({name:wname});
+      });
+    });
+    </script>>    
+  </head>>
+  <body id="" onload="onload()">
+    
+  </body>
+</html>
