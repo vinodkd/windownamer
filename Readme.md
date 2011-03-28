@@ -54,6 +54,7 @@ Todos
 =====
 * Validate name entered doesnt have XSS potential. FF: Done, Chrome: TBD
 * Display existing name if name entry chosen again.  FF: Done, Chrome: TBD
+* Prevent double entry of names. FF: Done, Chrome: TBD.
 * CSS for Popup. FF: NA, Chrome: TBD
 * Make plugin reinsert window name when tab reloads or changes location. FF:TBD, Chrome:Done
 * Create/find icon for plugin. FF: TBD, Chrome: TBD
@@ -61,5 +62,5 @@ Todos
 
 Future features
 ===============
-* Ability to turn names off. Although on Chrome at least, if you set the name to blank it will essentially revert back to the old state
+* Ability to turn names off.
 * Ability to configure the name text. Maybe "[context] actual title" is better than "context - actual title"?
