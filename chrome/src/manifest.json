@@ -1,6 +1,6 @@
 {
   "name"            : "Window Namer",
-  "version"         : "0.1",
+  "version"         : "0.2",
   "description"     : "Prefix all tabs in a window with a context tag so you can see it in the OS taskbar",
   "background_page" : "wn_bg.html",
   "content_scripts" : [
@@ -10,7 +10,7 @@
     }
   ],
   "browser_action"  : {
-    "default_icon"  : "icon.png",
+    "default_icon"  : "windownamer-icon.png",
     "popup"         : "wn_pop_getname.html"
   },
   "permissions"     : [
