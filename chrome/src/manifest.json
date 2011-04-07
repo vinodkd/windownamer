@@ -1,6 +1,6 @@
 {
   "name"            : "Window Namer",
-  "version"         : "0.2",
+  "version"         : "0.3",
   "description"     : "Prefix all tabs in a window with a context tag so you can see it in the OS taskbar",
   "background_page" : "wn_bg.html",
   "content_scripts" : [
