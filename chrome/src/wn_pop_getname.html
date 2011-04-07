@@ -2,33 +2,85 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Enter a name for this window</title>
+    <style type="text/css" media="screen">
+      * {
+        font-family:'Verdana','Sans-serif';
+        font-size:12px;
+      }
+      body{
+        min-width:250px;  /* magic numbers iteratively arrived at that displays the background image correctly on my machine. ymmv. */
+        min-height:170px;
+        overflow-x:hidden;
+        background-image: url("windownamer-bg.png");
+        background-size: cover;
+      }
+      #form1{
+        position:absolute;
+        left:32px;
+        top:82px;
+        width:200px;
+        height:35px;
+      }
+      #statusMsg{
+        font-size: 8px;
+      }
+    </style>
     <script type="text/javascript" charset="utf-8">
       var bgpg;
+      var statusMsg;
+      var wname;
+      var wid ="";
 
       function onload(){
         bgpg = chrome.extension.getBackgroundPage();
         console.log("bgpg:"+bgpg);
-      }
-
-      function storeName(){
-        var wname = document.getElementById("windowname_tb");
-        var wid ="";
         chrome.windows.getCurrent(function (win){
           wid=win.id;
-          console.log(wid+", "+wname.value);
-          bgpg.addNameForWindow(wid,wname.value);
-          window.close();
+          console.log(wid);
+          bgpg.getNameforWindow(function(currentName){
+            
+            statusMsg = document.getElementById('statusMsg');
+            wname = document.getElementById("wname");
+            wname.value = currentName;
+            if(currentName !=""){
+              updateMsg("Clear name to remove fromo title");
+            }
+            wname.select();
+          });
         });
+      }
+
+      function isValid(wname){
+      //only allow names with letters and digits
+      //TODO: change this to allow spaces and quotes
+      var isValid = !/\W+/.test(wname)
+      return isValid;
+      }
+      
+      function updateMsg(msg){
+        statusMsg.innerHTML = msg;
+      }
+      
+      function storeName(){
+        if(!isValid(wname.value)){
+          updateMsg("Try again with letters, digits & _'s  :)");
+          wname.select();
+          return false;
+        }
+        bgpg.addNameForWindow(wid,wname.value);
+        window.close();
+        return true;
       }
     </script>
   </head>
   <body onload="onload()">
-    <form>
+    <form id="form1">
       <span>
-        <label for="windowname_tb">Enter a name for this window:</label>
-        <input type="text" name="" value="" id="windowname_tb">
+        <label for="wname">My Name is...</label>
+        <input type="text" name="" value="" id="wname">
+        <button onclick="return storeName();">Go</button>
       </span>
-      <div><input type="submit" onclick="storeName()" value="Continue &rarr;"></div>
+      <div> <label id="statusMsg"></label> </div>
     </form>
   </body>
 </html>
