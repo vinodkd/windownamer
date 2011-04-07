@@ -21,21 +21,29 @@
 
       function addNameForWindow(wid,wname){
         console.log("bg:"+ wid +", "+wname);
+        var oldName = windownames[wid];
+
         windownames[wid] = wname;
+        //TODO: figure out how to catch the exception thrown when trying to name the chrome:extensions window.
+        // an error is thrown when the getAllInWindow executes, and a try/catch doesnt work.
+        // ignoring for now as this is not a end user scenario; but other extension developers will have this issue
+        
         chrome.tabs.getAllInWindow(wid,function(tabs){
           console.log(tabs.length);
           for(t in tabs){
             var tid=tabs[t].id;
             var title = tabs[t].title;
             console.log("called:tid:"+tid+",title:"+title);
-/*
-            chrome.tabs.sendRequest(tid,{"wname":wname},function(resp){
-              console.log("called:tid:"+tid+",title:"+tabs[t].title);
-            });
-*/
             try{
-              chrome.tabs.executeScript(tid,{code: "document.title = '" + wname +" - ' + document.title"});
-              //chrome.tabs.executeScript(tid,{code: "document.title += '" + wname +"'"});  
+              var wnPrefix = (wname != "") ? wname + " - " : "";
+              var execCode;
+              if(!oldName || oldName == ""){
+                execCode = "document.title = '" + wnPrefix +"' + document.title";
+              }else{
+                var oldWnPrefix = oldName + " - ";
+                execCode = "document.title = document.title.replace('" + oldWnPrefix +"','"+ wnPrefix + "')";
+              }
+              chrome.tabs.executeScript(tid,{code: execCode});
             }
             catch(ex){
               console.log("windownamer failed to name this tab. reason: "+ ex);
