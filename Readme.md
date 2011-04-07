@@ -34,11 +34,11 @@ Implementation
 ==============
 When it comes to implementing the idea of a window name, there's a bit of a problem: Browser windows dont have names.
 
-Rather, they all have the same name - the browser's name; which browser authors have wisely chosen to append it to the page's (read tab's these days) title. So even if I could change add something to the "Mozilla Firefox" or "Google Chrome" texts, it would be of no use from the POV of seeing such a name in a taskbar or while switching using Alt-tab (or mac equivalent)
+Rather, they all have the same name - the browser's name; which browser authors have wisely chosen to append to the page's (read tab's these days) title. So even if I could change add something to the "Mozilla Firefox" or "Google Chrome" texts, it would be of no use from the POV of seeing such a name in a taskbar or while switching using Alt-tab (or mac equivalent)
 
 I have therefore implemented Window Namer as a Tab title updater, actually.
 
-Yes, this means all your tabs' title will have a prefix that you choose.
+Yes, this means all your tabs' titles will have a prefix that you choose.
 Yes, they will retain the name past page reloads and changes in page location
 Yes, new tabs will automatically get the name you chose when a page is loaded in them.
 And yes, this also means that if you have tons of tabs opened, looking at the first few letters to discern the content is no longer an option. I did consider some crazy time-elapse hide of the window name, but havent got to it yet. IMO unless is a graceful fade in/out, it would be a very jarring experience.
@@ -52,15 +52,16 @@ Browser specific details
 
 Todos
 =====
-* Validate name entered doesnt have XSS potential. FF: Done, Chrome: TBD
-* Display existing name if name entry chosen again.  FF: Done, Chrome: TBD
-* Prevent double entry of names. FF: Done, Chrome: TBD.
-* CSS for Popup. FF: NA, Chrome: TBD
+* Validate name entered doesnt have XSS potential. FF: Done, Chrome: Done
+* Display existing name if name entry chosen again.  FF: Done, Chrome: Done
+* Prevent double entry of names. FF: Done, Chrome: Done (caveat:uninstalling the extension leaves the names behind).
+* CSS for Popup. FF: NA, Chrome: Done intersting way. YMMV
 * Make plugin reinsert window name when tab reloads or changes location. FF:TBD, Chrome:Done
-* Create/find icon for plugin. FF: TBD, Chrome: TBD
-* Packaging of the plugin. FF: TBD, Chrome: TBD
+* Create/find icon for plugin. FF: TBD, Chrome: Done
+* Packaging of the plugin. FF: TBD, Chrome: Done
 
 Future features
 ===============
-* Ability to turn names off.
+* Ability to turn names off. FF: TBD, Chrome: Done. Updating the name with a blank removes it.
 * Ability to configure the name text. Maybe "[context] actual title" is better than "context - actual title"?
+* Ability to clean up after self when uninstalled. FF: TBD, Chrome: Cannot be done. No event exists that will fire on uninstall.
